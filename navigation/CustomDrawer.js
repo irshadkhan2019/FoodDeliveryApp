@@ -17,6 +17,30 @@ import {
 } from "../constants/";
 
 const Drawer = createDrawerNavigator();
+const CustomDrawerItem = ({ label, icon }) => {
+  return (
+    <TouchableOpacity
+      style={{
+        flexDirection: "row",
+        height: 40,
+        marginBottom: SIZES.base,
+        alignItems: "center",
+        paddingLeft: SIZES.radius,
+        borderRadius: SIZES.base,
+        // backgroundColor: "lightblue",
+      }}
+      //onPress
+    >
+      <Image
+        source={icon}
+        style={{ width: 20, height: 20, tintColor: COLORS.white }}
+      ></Image>
+      <Text style={{ marginLeft: 15, color: COLORS.white, ...FONTS.h3 }}>
+        {label}
+      </Text>
+    </TouchableOpacity>
+  );
+};
 
 const CustomDrawerContent = ({ navigation }) => {
   return (
@@ -36,7 +60,63 @@ const CustomDrawerContent = ({ navigation }) => {
         </View>
 
         {/* profile */}
+        <TouchableOpacity
+          style={{
+            flexDirection: "row",
+            marginTop: SIZES.radius,
+            alignItems: "center",
+          }}
+          onPress={() => console.log("profile")}
+        >
+          <Image
+            source={dummyData.myProfile?.profile_image}
+            style={{ width: 50, height: 50, borderRadius: SIZES.radius }}
+          ></Image>
+          <View style={{ marginLeft: SIZES.radius }}>
+            <Text style={{ color: COLORS.white, ...FONTS.h3 }}>
+              {dummyData.myProfile?.name}
+            </Text>
+            <Text style={{ color: COLORS.white, ...FONTS.body4 }}>
+              View Your Profile
+            </Text>
+          </View>
+        </TouchableOpacity>
+
         {/* drawer items */}
+        <View style={{ flex: 1, paddingTop: SIZES.padding }}>
+          <CustomDrawerItem label={constants.screens.home} icon={icons.home} />
+          <CustomDrawerItem
+            label={constants.screens.my_wallet}
+            icon={icons.wallet}
+          />
+          <CustomDrawerItem
+            label={constants.screens.notification}
+            icon={icons.notification}
+          />
+          <CustomDrawerItem
+            label={constants.screens.favourite}
+            icon={icons.favourite}
+          />
+          {/* Line divider */}
+          <View
+            style={{
+              height: 1,
+              backgroundColor: COLORS.lightGray1,
+              marginVertical: SIZES.radius,
+              marginLeft: SIZES.radius,
+            }}
+          />
+          {/* remaininf drawer items */}
+          <CustomDrawerItem label={"Track Your Order"} icon={icons.location} />
+          <CustomDrawerItem label={"Coupons"} icon={icons.coupon} />
+          <CustomDrawerItem label={"Settings"} icon={icons.setting} />
+          <CustomDrawerItem label={"Invite a Friend"} icon={icons.profile} />
+          <CustomDrawerItem label={"Help Center"} icon={icons.help} />
+        </View>
+        {/* logout */}
+        <View style={{ marginBottom: SIZES.padding }}>
+          <CustomDrawerItem label={"Logout"} icon={icons.logout} />
+        </View>
       </View>
     </DrawerContentScrollView>
   );
